@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Excel & Script Lab | Mapas Interactivos</title>
+  
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Estilos del Simulador -->
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+  <div class="excel-app-wrapper">
+    <!-- ====================================================================
+         1. BARRA SUPERIOR DE EXCEL
+         ==================================================================== -->
+    <header class="excel-title-bar">
+      <div class="excel-left-group">
+        <i class="fa-solid fa-file-excel excel-app-icon"></i>
+        <span class="autosave-pill">Guardado automático <i class="fa-solid fa-check"></i></span>
+        <span class="doc-name">Convierte_Tabla_Mapa_Interactivo.xlsx - Excel</span>
+      </div>
+
+      <div class="search-input-sim">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Buscar funciones, datos o ayuda...</span>
+      </div>
+
+      <div class="excel-right-actions">
+        <span style="font-size: 11px; opacity: 0.9;"><i class="fa-solid fa-cloud"></i> OneDrive</span>
+        <div class="user-badge" title="Inteligencia Eficiente">IE</div>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         2. CINTA DE OPCIONES / RIBBON DE EXCEL
+         ==================================================================== -->
+    <nav class="excel-ribbon-container">
+      <div class="ribbon-tabs-bar">
+        <button class="ribbon-tab-btn">Archivo</button>
+        <button class="ribbon-tab-btn">Inicio</button>
+        <button class="ribbon-tab-btn">Insertar</button>
+        <button class="ribbon-tab-btn">Disposición de página</button>
+        <button class="ribbon-tab-btn">Fórmulas</button>
+        <button class="ribbon-tab-btn">Datos</button>
+        <button class="ribbon-tab-btn">Revisar</button>
+        <button class="ribbon-tab-btn">Vista</button>
+        <button class="ribbon-tab-btn scriptlab-tab active">Script Lab</button>
+      </div>
+
+      <div class="ribbon-content-bar">
+        <div class="ribbon-group">
+          <button class="ribbon-btn btn-scriptlab-run" id="ribbon-btn-run" title="Ejecutar código en el panel lateral">
+            <i class="fa-solid fa-play" style="color: #2563eb; font-size: 14px;"></i>
+            <span>Ejecutar</span>
+          </button>
+          <button class="ribbon-btn" title="Abrir editor de código de Script Lab">
+            <i class="fa-solid fa-code" style="color: #059669; font-size: 14px;"></i>
+            <span>Código</span>
+          </button>
+        </div>
+
+        <div class="ribbon-group">
+          <button class="ribbon-btn" title="Descargar archivos del proyecto">
+            <i class="fa-solid fa-download" style="color: #4b5563;"></i>
+            <span>Descargar</span>
+          </button>
+          <button class="ribbon-btn" title="Compartir solución">
+            <i class="fa-solid fa-share-nodes" style="color: #4b5563;"></i>
+            <span>Compartir</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ====================================================================
+         3. BARRA DE FÓRMULAS
+         ==================================================================== -->
+    <div class="formula-bar-container">
+      <div class="cell-name-box" id="active-cell-label">A1</div>
+      <div class="fx-symbol">fx</div>
+      <input type="text" class="formula-input-field" value="=TABLA.SELECCIONADA()" readonly>
+    </div>
+
+    <!-- ====================================================================
+         4. WORKSPACE: GRID EXCEL + TASKPANE SCRIPT LAB
+         ==================================================================== -->
+    <main class="excel-workspace">
+      
+      <!-- Panel Izquierdo: Cuadrícula de Hoja de Cálculo -->
+      <section class="grid-container">
+        <div class="grid-scroll-area">
+          <table class="excel-table">
+            <tbody id="grid-table-body">
+              <!-- Renderizado dinámico vía demo.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pestañas de Hojas Inferiores -->
+        <footer class="sheet-tabs-bar">
+          <button class="sheet-tab active" data-sheet="1">
+            <i class="fa-solid fa-table-cells"></i> 1. Clientes_Rutas
+          </button>
+          <button class="sheet-tab" data-sheet="2">
+            <i class="fa-solid fa-truck-fast"></i> 2. Registro_GPS
+          </button>
+          <button class="sheet-tab" data-sheet="3">
+            <i class="fa-solid fa-building-circle-check"></i> 3. Inmuebles_Madrid
+          </button>
+          <button class="sheet-tab-add" title="Nueva Hoja"><i class="fa-solid fa-plus"></i></button>
+        </footer>
+      </section>
+
+      <!-- Panel Derecho: Taskpane de Script Lab -->
+      <aside class="taskpane-container">
+        <!-- Cabecera del Panel Lateral -->
+        <div class="taskpane-header">
+          <div class="taskpane-title-group">
+            <i class="fa-solid fa-flask-vial scriptlab-logo-icon"></i>
+            <span class="taskpane-title">Script Lab • Visor Interactivo</span>
+          </div>
+          <button class="ribbon-btn" style="padding: 2px 6px;" title="Cerrar panel lateral"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Selector Rápido de las 3 Aplicaciones -->
+        <div class="app-switcher-bar">
+          <button class="app-switch-btn active" data-app="app1">
+            <i class="fa-solid fa-location-dot"></i> Clientes
+          </button>
+          <button class="app-switch-btn" data-app="app2">
+            <i class="fa-solid fa-truck-fast"></i> GPS Flota
+          </button>
+          <button class="app-switch-btn" data-app="app3">
+            <i class="fa-solid fa-building"></i> Inmuebles
+          </button>
+        </div>
+
+        <!-- Visor donde se ejecuta la App de Script Lab -->
+        <div class="taskpane-viewport">
+          <iframe id="taskpane-iframe" class="app-iframe" src="runner1.html" title="Script Lab App Viewport"></iframe>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- ====================================================================
+         5. BARRA DE ESTADO INFERIOR DE EXCEL
+         ==================================================================== -->
+    <footer class="excel-status-bar">
+      <div><span>Listo</span> • <span>Sincronizado con Script Lab</span></div>
+      <div><span>Zoom: 100%</span></div>
+    </footer>
+  </div>
+
+  <!-- Scripts del Simulador -->
+  <script src="demo.js"></script>
+</body>
+</html>

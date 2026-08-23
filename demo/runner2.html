@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App 2: Rastreo GPS - Script Lab Runner</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../app2/index.css">
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Cabecera Minimalista -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="brand-icon">
+        <i class="fa-solid fa-truck-fast"></i>
+      </div>
+      <div class="brand-text">
+        <h1>Rastreo GPS de Flota</h1>
+        <span id="status-badge" class="badge-status online">
+          <span class="status-dot"></span> Sincronizado
+        </span>
+      </div>
+    </div>
+
+    <!-- Barra de Acciones Principales -->
+    <div class="action-toolbar">
+      <button id="btn-sync" class="btn btn-primary" title="Leer registros de la tabla en Excel">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <span>Sincronizar</span>
+      </button>
+      <button id="btn-center" class="btn btn-secondary" title="Centrar mapa en la posición actual del vehículo">
+        <i class="fa-solid fa-crosshairs"></i>
+        <span>Centrar</span>
+      </button>
+      <button id="btn-toggle-trail" class="btn btn-secondary" title="Mostrar u ocultar la trayectoria completa">
+        <i class="fa-solid fa-route"></i>
+        <span>Ver Ruta</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal del Mapa -->
+  <main class="map-viewport">
+    <div id="map"></div>
+
+    <!-- Panel Flotante: Telemetría del Vehículo en Tiempo Real -->
+    <div id="telemetry-panel" class="floating-panel telemetry-panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <i class="fa-solid fa-satellite-dish text-blue"></i>
+          <span id="vehicle-title">Unidad Móvil 01</span>
+        </div>
+        <span id="telemetry-status" class="status-pill status-moving">En Movimiento</span>
+      </div>
+
+      <div class="telemetry-grid">
+        <!-- Velocidad Digital -->
+        <div class="telemetry-card highlight-card">
+          <span class="telemetry-label">Velocidad</span>
+          <div class="speed-readout">
+            <span id="tel-speed" class="speed-number">0</span>
+            <span class="speed-unit">km/h</span>
+          </div>
+        </div>
+
+        <!-- Odómetro Acumulado -->
+        <div class="telemetry-card">
+          <span class="telemetry-label">Distancia</span>
+          <div class="metric-readout">
+            <span id="tel-distance" class="metric-number">0.0</span>
+            <span class="metric-unit">km</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Combustible y Detalles -->
+      <div class="telemetry-details">
+        <div class="fuel-row">
+          <div class="fuel-info">
+            <i class="fa-solid fa-gas-pump text-blue"></i>
+            <span>Combustible:</span>
+          </div>
+          <span id="tel-fuel-text" class="fuel-pct">98%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="tel-fuel-bar" class="progress-bar-fill" style="width: 98%;"></div>
+        </div>
+
+        <div class="location-row">
+          <i class="fa-solid fa-location-dot text-blue"></i>
+          <div class="location-text">
+            <span class="loc-sub">Ubicación actual</span>
+            <strong id="tel-location" class="loc-main">Centro Logístico Norte</strong>
+          </div>
+        </div>
+
+        <div class="driver-row">
+          <i class="fa-solid fa-id-badge text-blue"></i>
+          <div class="driver-text">
+            <span class="loc-sub">Conductor</span>
+            <strong id="tel-driver" class="loc-main">Carlos Mendoza</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra Inferior de Control de Reproducción (Timeline / Slicer) -->
+    <div id="playback-bar" class="floating-playback-card">
+      <div class="playback-top-row">
+        <!-- Controles Multimedia -->
+        <div class="playback-controls">
+          <button id="btn-reset" class="control-btn" title="Reiniciar al inicio de la ruta">
+            <i class="fa-solid fa-backward-step"></i>
+          </button>
+          <button id="btn-play" class="control-btn play-btn" title="Reproducir / Pausar ruta">
+            <i id="play-icon" class="fa-solid fa-play"></i>
+          </button>
+          <button id="btn-step-fwd" class="control-btn" title="Avanzar 1 paso">
+            <i class="fa-solid fa-forward-step"></i>
+          </button>
+        </div>
+
+        <!-- Indicador de Hora y Paso Actual -->
+        <div class="playback-info">
+          <div class="time-clock">
+            <i class="fa-regular fa-clock text-blue"></i>
+            <span id="current-time-text" class="time-display">08:00</span>
+          </div>
+          <span id="step-counter" class="step-text">Paso 1 de 20</span>
+        </div>
+
+        <!-- Selector de Velocidad -->
+        <div class="speed-selector">
+          <button class="speed-chip active" data-speed="1">1x</button>
+          <button class="speed-chip" data-speed="2">2x</button>
+          <button class="speed-chip" data-speed="4">4x</button>
+        </div>
+      </div>
+
+      <!-- Slider / Slicer de Línea de Tiempo -->
+      <div class="slider-container">
+        <input type="range" id="timeline-slider" min="0" max="19" value="0" step="1" class="timeline-slider">
+        <div class="slider-timestamps">
+          <span id="start-time-label">08:00</span>
+          <span id="end-time-label">11:15</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast de Notificaciones -->
+  <div id="toast" class="toast hidden">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span id="toast-msg">Mensaje de notificación</span>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../app2/index.js"></script>
+</body>
+</html>

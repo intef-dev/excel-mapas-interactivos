@@ -1,0 +1,19 @@
+﻿ID,Cliente,Contacto,Ciudad,Latitud,Longitud,Zona,Venta_USD,Prioridad
+CLI-001,Supermercado La Sierra,Roberto Méndez,Madrid,40.4532,-3.6883,Norte,12500,Alta
+CLI-002,Farmacias San Miguel,Lucía Gómez,Madrid,40.4611,-3.6912,Norte,8900,Media
+CLI-003,Distribuidora Del Valle,Carlos Ortiz,Madrid,40.4485,-3.6720,Norte,15400,Alta
+CLI-004,Restaurante El Mirador,Elena Ramos,Madrid,40.4705,-3.7021,Norte,6200,Baja
+CLI-005,Tecnología & Redes Global,Marcos Díaz,Madrid,40.4182,-3.7035,Centro,21000,Alta
+CLI-006,Boutique Castellana,Sofía Morales,Madrid,40.4250,-3.6910,Centro,9800,Media
+CLI-007,Cafetería Plaza Mayor,Javier Santos,Madrid,40.4155,-3.7074,Centro,5400,Baja
+CLI-008,Librería Central Sol,Ana Beltrán,Madrid,40.4168,-3.7038,Centro,7300,Media
+CLI-009,Automotriz del Sur,Pedro Castillo,Madrid,40.3882,-3.7125,Sur,18200,Alta
+CLI-010,Almacenes Del Río,Isabel Núñez,Madrid,40.3754,-3.6980,Sur,11300,Media
+CLI-011,Centro Médico Usera,David Romero,Madrid,40.3820,-3.7050,Sur,14100,Alta
+CLI-012,Panificadora Imperial,Carmen Vega,Madrid,40.3690,-3.7180,Sur,4900,Baja
+CLI-013,Muebles & Diseño Este,Fernando Torres,Madrid,40.4280,-3.6520,Este,13700,Media
+CLI-014,Logística San Blas,Raquel Pardo,Madrid,40.4350,-3.6300,Este,22500,Alta
+CLI-015,Construcciones Vicálvaro,Hugo Lozano,Madrid,40.4050,-3.6100,Este,16800,Alta
+CLI-016,Clínica Dental Poniente,Patricia Gil,Madrid,40.4390,-3.7350,Oeste,9200,Media
+CLI-017,Óptica Moncloa,Andrés Serrano,Madrid,40.4355,-3.7195,Oeste,7800,Baja
+CLI-018,Electrónica Puerta de Hierro,Marta Flores,Madrid,40.4620,-3.7410,Oeste,19400,Alta

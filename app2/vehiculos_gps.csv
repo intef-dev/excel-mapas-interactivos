@@ -1,0 +1,21 @@
+Paso,Hora,Vehiculo_ID,Conductor,Latitud,Longitud,Velocidad_kmh,Combustible_pct,Estado,Ubicacion
+1,08:00,UNIDAD-01,Carlos Mendoza,40.4850,-3.6920,0,98,Detenido,Centro Logístico Norte
+2,08:08,UNIDAD-01,Carlos Mendoza,40.4780,-3.6890,38,97,En Movimiento,Av. de Burgos
+3,08:15,UNIDAD-01,Carlos Mendoza,40.4670,-3.6860,54,95,En Movimiento,Paseo de la Castellana Norte
+4,08:22,UNIDAD-01,Carlos Mendoza,40.4530,-3.6880,42,93,En Movimiento,Plaza de Castilla
+5,08:30,UNIDAD-01,Carlos Mendoza,40.4510,-3.6890,0,92,En Entrega,Cliente 1 - Supermercado Sierra
+6,08:45,UNIDAD-01,Carlos Mendoza,40.4420,-3.6900,32,90,En Movimiento,Castellana / Nuevos Ministerios
+7,08:52,UNIDAD-01,Carlos Mendoza,40.4350,-3.6890,28,88,En Movimiento,Paseo de Eduardo Dato
+8,09:00,UNIDAD-01,Carlos Mendoza,40.4280,-3.6880,0,87,En Entrega,Cliente 2 - Boutique Castellana
+9,09:15,UNIDAD-01,Carlos Mendoza,40.4200,-3.6950,22,85,En Movimiento,Paseo del Prado
+10,09:22,UNIDAD-01,Carlos Mendoza,40.4150,-3.7050,15,83,En Movimiento,Plaza Mayor / Sol
+11,09:30,UNIDAD-01,Carlos Mendoza,40.4120,-3.7080,0,82,En Entrega,Cliente 3 - Cafetería Central
+12,09:45,UNIDAD-01,Carlos Mendoza,40.4020,-3.7060,45,80,En Movimiento,Ronda de Atocha
+13,09:52,UNIDAD-01,Carlos Mendoza,40.3920,-3.7080,58,78,En Movimiento,Av. del Manzanares
+14,10:00,UNIDAD-01,Carlos Mendoza,40.3820,-3.7120,0,76,En Entrega,Cliente 4 - Automotriz del Sur
+15,10:18,UNIDAD-01,Carlos Mendoza,40.3750,-3.7020,62,74,En Movimiento,Autovía M-30 Sur
+16,10:28,UNIDAD-01,Carlos Mendoza,40.3880,-3.6700,75,71,En Movimiento,M-30 Este
+17,10:38,UNIDAD-01,Carlos Mendoza,40.4150,-3.6550,68,68,En Movimiento,M-30 / O'Donnell
+18,10:48,UNIDAD-01,Carlos Mendoza,40.4320,-3.6350,48,65,En Movimiento,Av. de San Blas
+19,10:55,UNIDAD-01,Carlos Mendoza,40.4360,-3.6300,0,64,En Entrega,Cliente 5 - Logística Este
+20,11:15,UNIDAD-01,Carlos Mendoza,40.4850,-3.6920,0,58,Detenido,Retorno a Centro Logístico

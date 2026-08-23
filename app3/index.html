@@ -1,0 +1,143 @@
+<div class="app-container">
+  <!-- Cabecera Minimalista -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="brand-icon">
+        <i class="fa-solid fa-building-circle-check"></i>
+      </div>
+      <div class="brand-text">
+        <h1>Explorador Inmobiliario</h1>
+        <span id="status-badge" class="badge-status online">
+          <span class="status-dot"></span> Sincronizado
+        </span>
+      </div>
+    </div>
+
+    <!-- Barra de Acciones Principales -->
+    <div class="action-toolbar">
+      <button id="btn-sync" class="btn btn-secondary" title="Sincronizar datos de la tabla en Excel">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <span>Sincronizar</span>
+      </button>
+      <button id="btn-export-summary" class="btn btn-primary" title="Exportar resumen y tabla filtrada a Excel">
+        <i class="fa-solid fa-file-excel"></i>
+        <span>Descargar Resumen</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Filtros Rápidos por Tipología de Propiedad -->
+  <nav class="filter-bar">
+    <div class="filter-scroll" id="type-filters">
+      <button class="filter-chip active" data-type="all">Todos <span class="chip-count" id="count-all">20</span></button>
+      <button class="filter-chip" data-type="Piso">Pisos <span class="chip-count" id="count-pisos">10</span></button>
+      <button class="filter-chip" data-type="Ático">Áticos <span class="chip-count" id="count-aticos">3</span></button>
+      <button class="filter-chip" data-type="Chalet">Chalets <span class="chip-count" id="count-chalets">4</span></button>
+      <button class="filter-chip" data-type="Dúplex">Dúplex <span class="chip-count" id="count-duplex">3</span></button>
+    </div>
+  </nav>
+
+  <!-- Contenedor Principal del Mapa -->
+  <main class="map-viewport">
+    <div id="map"></div>
+
+    <!-- Panel Flotante Superior: Slicer de Presupuesto -->
+    <div id="budget-slicer-card" class="floating-panel budget-slicer-card">
+      <div class="slicer-header">
+        <div class="slicer-title-group">
+          <i class="fa-solid fa-sliders text-blue"></i>
+          <span class="slicer-title">Presupuesto Máximo</span>
+        </div>
+        <div class="budget-display-badge">
+          <span id="budget-display">€ 500.000</span>
+        </div>
+      </div>
+
+      <div class="slider-control-row">
+        <input 
+          type="range" 
+          id="budget-slider" 
+          min="150000" 
+          max="1000000" 
+          step="25000" 
+          value="500000" 
+          class="budget-slider"
+        >
+        <div class="slider-ticks">
+          <span>€ 150k</span>
+          <span>€ 350k</span>
+          <span>€ 600k</span>
+          <span>€ 850k</span>
+          <span>€ 1M+</span>
+        </div>
+      </div>
+
+      <!-- Presets de Presupuesto Rápido -->
+      <div class="budget-presets">
+        <button class="preset-btn" data-budget="250000">€ 250k</button>
+        <button class="preset-btn" data-budget="400000">€ 400k</button>
+        <button class="preset-btn active" data-budget="500000">€ 500k</button>
+        <button class="preset-btn" data-budget="750000">€ 750k</button>
+        <button class="preset-btn" data-budget="1000000">Todo</button>
+      </div>
+    </div>
+
+    <!-- Panel Flotante Lateral: Resumen Financiero y Mejor Opción -->
+    <div id="analytics-panel" class="floating-panel analytics-panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <i class="fa-solid fa-chart-pie text-blue"></i>
+          <span>Resumen de Mercado</span>
+        </div>
+        <span id="in-budget-pill" class="pill-count">11 Disponibles</span>
+      </div>
+
+      <!-- KPIs del Presupuesto Seleccionado -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Precio Medio</span>
+          <strong id="kpi-avg-price" class="kpi-value">€ 320.000</strong>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Coste / m²</span>
+          <strong id="kpi-avg-sqm" class="kpi-value">3.450 €/m²</strong>
+        </div>
+      </div>
+
+      <!-- Tarjeta Destacada: Mejor Opción Inmobiliaria -->
+      <div class="best-deal-card" id="best-deal-box">
+        <div class="best-deal-badge">
+          <i class="fa-solid fa-trophy"></i>
+          <span>Mejor Oportunidad (€/m²)</span>
+        </div>
+        <div class="best-deal-content">
+          <h4 id="best-title">Piso en Chamberí Reformado</h4>
+          <div class="best-deal-metrics">
+            <span id="best-price" class="best-price">€ 295.000</span>
+            <span id="best-sqm" class="best-sqm">3.278 €/m² (90 m²)</span>
+          </div>
+          <p id="best-address" class="best-address">Calle Fuencarral 102, Madrid</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra Inferior de Métricas Rápidas -->
+    <div class="floating-stats-pill">
+      <div class="stat-item">
+        <i class="fa-solid fa-house-chimney text-blue"></i>
+        <span><strong id="stat-visible-props">11</strong> en presupuesto</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <i class="fa-solid fa-eye-slash text-light"></i>
+        <span><strong id="stat-hidden-props">9</strong> descartadas</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast de Notificaciones -->
+  <div id="toast" class="toast hidden">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span id="toast-msg">Mensaje de notificación</span>
+  </div>
+</div>

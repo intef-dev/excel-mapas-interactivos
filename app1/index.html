@@ -1,0 +1,155 @@
+<div class="app-container">
+  <!-- Cabecera Minimalista -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="brand-icon">
+        <i class="fa-solid fa-map-location-dot"></i>
+      </div>
+      <div class="brand-text">
+        <h1>Mapa de Clientes</h1>
+        <span id="status-badge" class="badge-status online">
+          <span class="status-dot"></span> Sincronizado
+        </span>
+      </div>
+    </div>
+
+    <!-- Barra de Acciones Principales -->
+    <div class="action-toolbar">
+      <button id="btn-sync" class="btn btn-primary" title="Leer datos seleccionados en Excel">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <span>Sincronizar</span>
+      </button>
+      <button id="btn-zone-mode" class="btn btn-secondary" title="Asignar zonas interactivamente por radio">
+        <i class="fa-solid fa-bullseye"></i>
+        <span>Asignar Zona</span>
+      </button>
+      <button id="btn-route-mode" class="btn btn-secondary" title="Trazar ruta de visitas entre clientes">
+        <i class="fa-solid fa-route"></i>
+        <span>Ruta</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Filtros Rápidos por Zona -->
+  <nav class="filter-bar">
+    <div class="filter-scroll" id="zone-filters">
+      <button class="filter-chip active" data-zone="all">Todos <span class="chip-count" id="count-all">18</span></button>
+      <button class="filter-chip" data-zone="Norte">Norte <span class="chip-count" id="count-norte">4</span></button>
+      <button class="filter-chip" data-zone="Centro">Centro <span class="chip-count" id="count-centro">4</span></button>
+      <button class="filter-chip" data-zone="Sur">Sur <span class="chip-count" id="count-sur">4</span></button>
+      <button class="filter-chip" data-zone="Este">Este <span class="chip-count" id="count-este">3</span></button>
+      <button class="filter-chip" data-zone="Oeste">Oeste <span class="chip-count" id="count-oeste">3</span></button>
+    </div>
+  </nav>
+
+  <!-- Contenedor Principal del Mapa -->
+  <main class="map-viewport">
+    <div id="map"></div>
+
+    <!-- Panel Flotante: Asignación Interactiva de Zonas -->
+    <div id="zone-panel" class="floating-panel zone-panel hidden">
+      <div class="panel-header">
+        <div class="panel-title">
+          <i class="fa-solid fa-crosshairs text-blue"></i>
+          <span>Asignación de Zona por Radio</span>
+        </div>
+        <button id="btn-close-zone" class="btn-icon" title="Cerrar panel">&times;</button>
+      </div>
+
+      <div class="panel-body">
+        <p class="panel-instruction">
+          <i class="fa-solid fa-hand-pointer"></i> Arrastra el marcador en el mapa para posicionar el centro del radio.
+        </p>
+
+        <div class="form-group">
+          <label for="zone-select">Zona a asignar:</label>
+          <select id="zone-select" class="form-select">
+            <option value="Norte" data-color="#2563eb">Zona Norte (Azul)</option>
+            <option value="Centro" data-color="#0284c7">Zona Centro (Cian)</option>
+            <option value="Sur" data-color="#059669">Zona Sur (Esmeralda)</option>
+            <option value="Este" data-color="#d97706">Zona Este (Ámbar)</option>
+            <option value="Oeste" data-color="#7c3aed">Zona Oeste (Violeta)</option>
+            <option value="VIP Express" data-color="#e11d48">Zona VIP Express (Rojo)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="slider-label-row">
+            <label for="radius-slider">Radio de cobertura:</label>
+            <span id="radius-value" class="slider-val">3.5 km</span>
+          </div>
+          <input type="range" id="radius-slider" min="0.5" max="12.0" step="0.2" value="3.5" class="slider">
+        </div>
+
+        <div class="preview-metric">
+          <div class="metric-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="metric-info">
+            <span class="metric-number" id="preview-count">0</span>
+            <span class="metric-label">clientes seleccionados dentro del radio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <button id="btn-cancel-zone" class="btn btn-secondary btn-sm">Cancelar</button>
+        <button id="btn-save-zone" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-check"></i>
+          <span>Guardar Zonas</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel Flotante: Resumen de Ruta -->
+    <div id="route-panel" class="floating-panel route-panel hidden">
+      <div class="panel-header">
+        <div class="panel-title">
+          <i class="fa-solid fa-route text-blue"></i>
+          <span>Ruta de Visitas Sugerida</span>
+        </div>
+        <button id="btn-close-route" class="btn-icon" title="Ocultar ruta">&times;</button>
+      </div>
+
+      <div class="route-metrics-grid">
+        <div class="route-metric-card">
+          <span class="metric-sub">Paradas</span>
+          <span class="metric-main" id="route-stops">18</span>
+        </div>
+        <div class="route-metric-card">
+          <span class="metric-sub">Distancia Total</span>
+          <span class="metric-main" id="route-distance">0.0 km</span>
+        </div>
+        <div class="route-metric-card">
+          <span class="metric-sub">Tiempo Estimado</span>
+          <span class="metric-main" id="route-time">0 min</span>
+        </div>
+      </div>
+
+      <!-- Botón de Descarga / Exportación de Ruta a Excel -->
+      <div class="route-actions">
+        <button id="btn-export-route" class="btn btn-primary btn-block" title="Crear tabla 'Ruta_Generada' en Excel">
+          <i class="fa-solid fa-file-excel"></i>
+          <span>Descargar Ruta a Excel</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Barra Inferior de Métricas Rápidas -->
+    <div class="floating-stats-pill">
+      <div class="stat-item">
+        <i class="fa-solid fa-shop text-blue"></i>
+        <span><strong id="stat-visible-clients">18</strong> Clientes</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <i class="fa-solid fa-dollar-sign text-blue"></i>
+        <span><strong id="stat-total-sales">$234,400</strong></span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast de Notificaciones -->
+  <div id="toast" class="toast hidden">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span id="toast-msg">Mensaje de notificación</span>
+  </div>
+</div>

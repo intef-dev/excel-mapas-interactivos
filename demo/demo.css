@@ -1,0 +1,507 @@
+/* ==========================================================================
+   SIMULADOR DE MICROSOFT EXCEL WEB & SCRIPT LAB TASKPANE (GitHub Pages)
+   ========================================================================== */
+
+:root {
+  --excel-green: #107c41;
+  --excel-green-dark: #0b5a2f;
+  --excel-green-light: #e6f4ea;
+  --excel-ribbon-bg: #f3f2f1;
+  --excel-border: #d1d5db;
+  --excel-grid-border: #e5e7eb;
+  --excel-header-bg: #f9fafb;
+  --excel-active-tab: #ffffff;
+  --excel-selected-cell: #107c41;
+
+  --taskpane-width: 440px;
+  --font-excel: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: var(--font-excel);
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.excel-app-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ==========================================================================
+   1. BARRA SUPERIOR DE EXCEL (Verde Corporativo)
+   ========================================================================== */
+.excel-title-bar {
+  height: 40px;
+  background-color: var(--excel-green);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  user-select: none;
+}
+
+.excel-left-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.excel-app-icon {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.doc-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.autosave-pill {
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.search-input-sim {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: #ffffff;
+  width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.excel-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-badge {
+  font-size: 12px;
+  font-weight: 600;
+  background: #ffffff;
+  color: var(--excel-green);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   2. CINTA DE OPCIONES / RIBBON DE EXCEL
+   ========================================================================== */
+.excel-ribbon-container {
+  background-color: var(--excel-ribbon-bg);
+  border-bottom: 1px solid var(--excel-border);
+}
+
+.ribbon-tabs-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--excel-border);
+}
+
+.ribbon-tab-btn {
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4b5563;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.ribbon-tab-btn:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.ribbon-tab-btn.active {
+  color: var(--excel-green);
+  font-weight: 600;
+  border-bottom-color: var(--excel-green);
+  background-color: #ffffff;
+}
+
+.ribbon-tab-btn.scriptlab-tab {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.ribbon-tab-btn.scriptlab-tab.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+.ribbon-content-bar {
+  height: 52px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 16px;
+}
+
+.ribbon-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 14px;
+  border-right: 1px solid var(--excel-border);
+}
+
+.ribbon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #374151;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ribbon-btn:hover {
+  background-color: #f3f4f6;
+  border-color: var(--excel-border);
+}
+
+.ribbon-btn.btn-scriptlab-run {
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   3. BARRA DE FÓRMULAS
+   ========================================================================== */
+.formula-bar-container {
+  height: 30px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--excel-border);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+}
+
+.cell-name-box {
+  width: 50px;
+  height: 22px;
+  border: 1px solid var(--excel-border);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.fx-symbol {
+  font-style: italic;
+  font-family: serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #6b7280;
+  padding: 0 4px;
+}
+
+.formula-input-field {
+  flex: 1;
+  height: 22px;
+  border: 1px solid var(--excel-border);
+  padding: 0 8px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  outline: none;
+}
+
+/* ==========================================================================
+   4. WORKSPACE: GRID EXCEL (Izquierda) + TASKPANE SCRIPT LAB (Derecha)
+   ========================================================================== */
+.excel-workspace {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Panel Izquierdo: Hoja de Cuadrícula */
+.grid-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.grid-scroll-area {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+.excel-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 11px;
+  width: max-content;
+}
+
+.excel-table th, .excel-table td {
+  border: 1px solid var(--excel-grid-border);
+  padding: 4px 8px;
+  height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Cabeceras de Columna A, B, C... */
+.col-header {
+  background-color: var(--excel-header-bg);
+  font-weight: 600;
+  color: #6b7280;
+  text-align: center;
+  width: 90px;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.col-header.corner-header {
+  width: 40px;
+  min-width: 40px;
+  left: 0;
+  z-index: 30;
+}
+
+/* Números de Fila 1, 2, 3... */
+.row-header {
+  background-color: var(--excel-header-bg);
+  font-weight: 600;
+  color: #6b7280;
+  text-align: center;
+  width: 40px;
+  min-width: 40px;
+  user-select: none;
+  position: sticky;
+  left: 0;
+  z-index: 10;
+}
+
+/* Estilos de Tabla Oficial de Excel */
+.th-table-header {
+  background-color: #1e3a8a;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: left;
+}
+
+.th-table-green {
+  background-color: #065f46;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Resaltados Dinámicos de Celdas */
+.cell-highlight-gps {
+  background-color: #fef08a !important; /* Amarillo suave para GPS activo */
+  font-weight: 700;
+  transition: background-color 0.2s ease;
+}
+
+.cell-in-budget {
+  background-color: #dbeafe !important; /* Azul claro dentro de presupuesto */
+}
+
+.cell-best-deal {
+  background-color: #86efac !important; /* Verde claro mejor oportunidad */
+  font-weight: 700;
+}
+
+.cell-over-budget {
+  color: #9ca3af !important;
+  opacity: 0.6;
+}
+
+/* Bloque KPI en Excel */
+.kpi-excel-block {
+  background-color: #f0fdf4;
+  border: 2px solid #86efac !important;
+}
+
+/* Barra Inferior de Pestañas de Hojas */
+.sheet-tabs-bar {
+  height: 32px;
+  background-color: var(--excel-ribbon-bg);
+  border-top: 1px solid var(--excel-border);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 4px;
+  user-select: none;
+}
+
+.sheet-tab {
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #4b5563;
+  background-color: #e5e7eb;
+  border: 1px solid var(--excel-border);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sheet-tab.active {
+  background-color: #ffffff;
+  color: var(--excel-green);
+  border-top: 2px solid var(--excel-green);
+}
+
+.sheet-tab-add {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+/* ==========================================================================
+   5. PANEL LATERAL / TASKPANE SCRIPT LAB (Derecha)
+   ========================================================================== */
+.taskpane-container {
+  width: var(--taskpane-width);
+  min-width: var(--taskpane-width);
+  height: 100%;
+  border-left: 2px solid var(--excel-border);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.taskpane-header {
+  height: 44px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--excel-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.taskpane-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scriptlab-logo-icon {
+  color: #2563eb;
+  font-size: 16px;
+}
+
+.taskpane-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Selector de Aplicaciones (App 1, App 2, App 3) */
+.app-switcher-bar {
+  background-color: #f8fafc;
+  border-bottom: 1px solid var(--excel-border);
+  padding: 8px 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.app-switch-btn {
+  flex: 1;
+  padding: 6px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--excel-border);
+  background-color: #ffffff;
+  color: #4b5563;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.app-switch-btn:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.app-switch-btn.active {
+  background-color: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* Contenedor Iframe / Render de la Aplicación Activa */
+.taskpane-viewport {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Barra de Estado Inferior de Excel */
+.excel-status-bar {
+  height: 24px;
+  background-color: var(--excel-green);
+  color: #ffffff;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
