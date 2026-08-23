@@ -40,17 +40,37 @@ Si deseas descargar todos los archivos fuente, hojas de datos CSV y plantillas Y
 
 ---
 
-## ⚡ 5. Método Rápido: Importar en 1 Clic (Archivos YAML)
+## ⚡ 5. Método Rápido: Importar en 1 Clic (Gists Oficiales o Archivos YAML)
 
-Script Lab permite importar cualquier aplicación completa en 1 solo paso usando los archivos YAML incluidos en la carpeta [`snippets/`](./snippets/):
+La forma más rápida de ejecutar cualquiera de las 3 aplicaciones en tu Excel es importando los **GitHub Gists oficiales** directamente en Script Lab sin tener que copiar archivo por archivo:
 
-1. Abre **Excel** y ve a la pestaña **Script Lab** ➔ Haz clic en **Code**.
-2. En el menú de Script Lab (icono de hamburguesa ☰ o menú desplegable), selecciona **Import** (Importar).
-3. Pega el contenido de uno de los siguientes archivos:
-   - 📍 **App 1 (Clientes & Rutas):** [`snippets/app1_clientes_rutas.yaml`](./snippets/app1_clientes_rutas.yaml)
-   - 🚚 **App 2 (Rastreo GPS):** [`snippets/app2_rastreo_gps.yaml`](./snippets/app2_rastreo_gps.yaml)
-   - 🏢 **App 3 (Inmobiliario & Slicer):** [`snippets/app3_inmobiliario_presupuesto.yaml`](./snippets/app3_inmobiliario_presupuesto.yaml)
-4. Haz clic en **Import** y luego en **Run** (triángulo verde). ¡Listo!
+### 🔗 Enlaces directos a los Gists de cada App:
+
+| Aplicación | Caso de Uso | Enlace del GitHub Gist (1 Clic) |
+| :--- | :--- | :--- |
+| 📍 **App 1** | **Planificador de Rutas y Zonas de Clientes** | [`https://gist.github.com/intef-dev/beaa3c1d368562f0a47de9939986a243`](https://gist.github.com/intef-dev/beaa3c1d368562f0a47de9939986a243) |
+| 🚚 **App 2** | **Rastreo GPS de Flotas y Telemetría en Vivo** | [`https://gist.github.com/intef-dev/3e6eb2e3bf0ce05f5a68fdbcfe411559`](https://gist.github.com/intef-dev/3e6eb2e3bf0ce05f5a68fdbcfe411559) |
+| 🏢 **App 3** | **Explorador Inmobiliario y Slicer de Presupuesto** | [`https://gist.github.com/intef-dev/0cc96faa4ad891599678a131955cb0bc`](https://gist.github.com/intef-dev/0cc96faa4ad891599678a131955cb0bc) |
+
+---
+
+### 📋 Paso a Paso para Importar en Excel con Script Lab:
+
+#### Opción A: Mediante la URL del Gist (Recomendado)
+1. **Copia la URL** del Gist de la app que deseas probar (de la tabla superior).
+2. En **Microsoft Excel**, ve a la pestaña **Script Lab** y haz clic en **Code** para abrir el panel lateral.
+3. En el menú superior izquierdo de Script Lab (icono de hamburguesa **☰** o menú desplegable de snippets), haz clic en **Import** (Importar).
+4. En el cuadro superior que dice **"Import from a GitHub Gist URL or ID"**, pega la URL del Gist.
+5. Haz clic en **Import**.
+6. ¡Listo! Se cargará el código completo con todas las librerías configuradas. Haz clic en **Run** (botón de reproducción) para iniciar el mapa interactivo.
+
+#### Opción B: Mediante archivo YAML local (Sin conexión a Gist)
+1. Abre cualquiera de los archivos `.yaml` de la carpeta [`snippets/`](./snippets/):
+   - 📍 [`snippets/app1_clientes_rutas.yaml`](./snippets/app1_clientes_rutas.yaml)
+   - 🚚 [`snippets/app2_rastreo_gps.yaml`](./snippets/app2_rastreo_gps.yaml)
+   - 🏢 [`snippets/app3_inmobiliario_presupuesto.yaml`](./snippets/app3_inmobiliario_presupuesto.yaml)
+2. Copia todo su contenido de texto (`Ctrl + A` y luego `Ctrl + C`).
+3. En el menú **Import** de Script Lab, pega el texto en el cuadro inferior **"Paste snippet YAML or JSON"** y pulsa **Import**.
 
 ---
 
