@@ -9,7 +9,7 @@ Este proyecto complementa el video tutorial paso a paso de mi canal de YouTube *
 ## 🎥 1. Video Tutorial Paso a Paso
 
 Mira el desarrollo y la explicación técnica completa en YouTube:  
-👉 **[Ver Video en YouTube - HAZ CLIC AQUÍ](https://www.youtube.com/InteligenciaEficiente?sub_confirmation=1)**
+👉 **[Ver Video en YouTube - HAZ CLIC AQUÍ](https://youtu.be/RYdmNX00y6I)**
 
 ¡Si te sirve este contenido, no olvides dejar tu **Like**, **comentar** qué caso de uso aplicarás en tu trabajo y **suscribirte al canal** para no perderte futuros tutoriales!
 
@@ -18,19 +18,11 @@ Mira el desarrollo y la explicación técnica completa en YouTube:
 ## 🌐 2. Demo Interactiva en Vivo
 
 Puedes probar la simulación interactiva completa de Microsoft Excel Web con el panel lateral de Script Lab directamente en tu navegador (sin necesidad de abrir Excel):  
-👉 **[Ver Demo Interactiva en GitHub Pages](https://inteligenciaeficiente.github.io/AGO202603VL02-Convierte-tu-tabla-de-Excel-en-un-mapa-interactivo/demo/)**
+👉 **[Ver Demo Interactiva en GitHub Pages](https://intef-dev.github.io/excel-mapas-interactivos/demo/)**
 
 ---
 
-## 📥 3. Descarga Rápida del Proyecto
-
-Si deseas descargar todos los archivos fuente, hojas de datos CSV y plantillas YAML en un solo archivo comprimido ZIP:
-
-[![Descargar ZIP](https://img.shields.io/badge/Descargar-Proyecto_Completo_ZIP-blue?style=for-the-badge&logo=github)](https://github.com/InteligenciaEficiente/AGO202603VL02-Convierte-tu-tabla-de-Excel-en-un-mapa-interactivo/archive/refs/heads/main.zip)
-
----
-
-## 🚀 4. Las 3 Aplicaciones Incluidas
+## 🚀 3. Las 3 Aplicaciones Incluidas
 
 | App | Caso de Uso | Características Principales |
 | :---: | :--- | :--- |
@@ -40,7 +32,7 @@ Si deseas descargar todos los archivos fuente, hojas de datos CSV y plantillas Y
 
 ---
 
-## ⚡ 5. Método Rápido: Importar en 1 Clic (Gists Oficiales o Archivos YAML)
+## ⚡ 4. Método Rápido: Importar en 1 Clic (Gists Oficiales o Archivos YAML)
 
 La forma más rápida de ejecutar cualquiera de las 3 aplicaciones en tu Excel es importando los **GitHub Gists oficiales** directamente en Script Lab sin tener que copiar archivo por archivo:
 
@@ -74,7 +66,7 @@ La forma más rápida de ejecutar cualquiera de las 3 aplicaciones en tu Excel e
 
 ---
 
-## 🛠️ 6. Método Manual: Pestaña por Pestaña
+## 🛠️ 5. Método Manual: Pestaña por Pestaña
 
 Si prefieres copiar y pegar el código en las 4 pestañas individuales de Script Lab:
 
@@ -98,7 +90,7 @@ Tener instalado el complemento gratuito **Script Lab** en Excel (pestaña _Inser
 
 ---
 
-## 📂 7. Estructura del Repositorio
+## 📂 6. Estructura del Repositorio
 
 ```text
 ├── app1/                             # App 1: Clientes y Rutas
@@ -128,7 +120,7 @@ Tener instalado el complemento gratuito **Script Lab** en Excel (pestaña _Inser
 
 ---
 
-## 📊 8. Datasets de Ejemplo (CSV)
+## 📊 7. Datasets de Ejemplo (CSV)
 
 Cada carpeta incluye un dataset de ejemplo listo para pegar en Excel o inicializar automáticamente:
 * 🛒 [`clientes_demo.csv`](./app1/clientes_demo.csv): 18 clientes con coordenadas en Madrid, zonas de venta y prioridades.
@@ -137,7 +129,7 @@ Cada carpeta incluye un dataset de ejemplo listo para pegar en Excel o inicializ
 
 ---
 
-## 💼 9. Consultoría y Desarrollo a Medida (B2B)
+## 💼 8. Consultoría y Desarrollo a Medida (B2B)
 
 ¿Necesitas implementar una solución personalizada para tu empresa conectada a tus propias bases de datos, APIs de mapas satelitales, ERPs o CRMs?
 
@@ -146,7 +138,7 @@ Cada carpeta incluye un dataset de ejemplo listo para pegar en Excel o inicializ
 
 ---
 
-## 📱 10. ¡Únete a la Comunidad! Sígueme en mis Redes
+## 📱 9. ¡Únete a la Comunidad! Sígueme en mis Redes
 
 Para enterarte de nuevos tutoriales, macros, trucos de productividad y automatizaciones gratuitas:
 
@@ -157,7 +149,7 @@ Para enterarte de nuevos tutoriales, macros, trucos de productividad y automatiz
 
 ---
 
-## ☕ 11. Apoya este Proyecto
+## ☕ 10. Apoya este Proyecto
 
 Si este proyecto te ha sido de utilidad y deseas apoyar la creación continua de plantillas de código abierto y tutoriales gratuitos:
 
@@ -166,6 +158,6 @@ Si este proyecto te ha sido de utilidad y deseas apoyar la creación continua de
 
 ---
 
-## 📄 12. Licencia
+## 📄 11. Licencia
 
 Este proyecto está bajo la Licencia **MIT**. Eres libre de usar, modificar y distribuir este código tanto para fines personales como comerciales. Consulta el archivo [`LICENSE`](./LICENSE) para más detalles.
